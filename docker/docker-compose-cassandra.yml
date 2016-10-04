@@ -1,0 +1,48 @@
+version: '2'
+
+services:
+
+  cassandra1:
+    image: nirped/cassandra
+    container_name: cassandra1
+    environment:
+      - CASSANDRA_START_RPC=true
+    networks:
+      - dev
+
+  cassandra2:
+    image: nirped/cassandra
+    container_name: cassandra2
+    environment:
+      - CASSANDRA_SEEDS=cassandra1
+      - CASSANDRA_START_RPC=true
+    networks:
+      - dev
+
+  cassandra3:
+    image: nirped/cassandra
+    container_name: cassandra3
+    environment:
+      - CASSANDRA_SEEDS=cassandra1
+      - CASSANDRA_START_RPC=true
+    networks:
+      - dev
+
+  presto-coordinator:
+    image: nirped/presto-coordinator
+    container_name: presto-coordinator
+    environment:
+      - NODE_ID=coordinator0
+    networks:
+      - dev
+
+  presto-worker:
+    image: nirped/presto-worker
+    container_name: presto-worker
+    environment:
+      - NODE_ID=worker0
+    networks:
+      - dev
+
+networks:
+  dev:

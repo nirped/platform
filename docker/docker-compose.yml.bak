@@ -1,0 +1,49 @@
+version: '2'
+
+services:
+
+  hadoop-namenode:
+    image: nirped/hadoop-namenode
+    container_name: hadoop-namenode
+    ports:
+      - "50070:50070"
+    networks:
+      - dev
+
+  hadoop-datanode1:
+    image: nirped/hadoop-datanode
+    container_name: hadoop-datanode1
+    networks:
+      - dev
+
+  flink-master:
+    image: nirped/flink-master
+    container_name: flink-master
+    ports:
+      - "8081:8081"
+    networks:
+      - dev
+
+  flink-worker1:
+    image: nirped/flink-worker
+    container_name: flink-worker1
+    networks:
+      - dev
+
+  flink-worker2:
+    image: nirped/flink-worker
+    container_name: flink-worker2
+    networks:
+      - dev
+
+  elk:
+    image: nirped/elk
+    container_name: elk
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+      - "80:80"
+    networks:
+      - dev
+networks:
+  dev:

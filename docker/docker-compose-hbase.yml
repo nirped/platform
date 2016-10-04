@@ -1,0 +1,20 @@
+version: '2'
+
+services:
+
+  hbase-master:
+    image: nirped/hbase-master
+    container_name: hbase-master
+    ports:
+      - "16010:16010"
+    networks:
+      - dev
+
+  hbase-regionserver1:
+    image: nirped/hbase-regionserver
+    container_name: hbase-regionserver1
+    networks:
+      - dev
+
+networks:
+  dev:

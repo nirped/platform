@@ -1,0 +1,26 @@
+version: '2'
+
+services:
+
+  hadoop-namenode:
+    image: nirped/hadoop-namenode
+    container_name: hadoop-namenode
+    ports:
+      - "50070:50070"
+    networks:
+      - dev
+
+  hbase-datanode1:
+    image: nirped/hadoop-datanode
+    container_name: hbase-datanode1
+    networks:
+      - dev
+
+  zookeeper:
+    image: nirped/zookeeper
+    container_name: zookeeper
+    networks:
+      - dev
+
+networks:
+  dev:
